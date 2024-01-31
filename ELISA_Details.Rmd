@@ -1,0 +1,191 @@
+---
+title: "ELISA Details-TECAN PLATE READER"
+output: html_notebook
+---
+
+## Types of ELISA
+
+- Direct
+- Sandwich (signal amplification possible and adsorption effects of antigen)
+- Competitive (signal amplification possible)
+
+## ELISA Factors
+
+- plate (material and type)
+- washing (buffer type, frequency, time, intensity and cross rxns)
+- target analyte (conformation, epitope, matrix effects, assay detection limit, difficult to detect cytokines in serum)
+- antibodies (specificity, cross-rxns and concentration)
+- substrate (sensitivity)
+- incubation time
+
+## Refraction 
+
+- Bending of light as it passes from one medium to another.
+- The cause of refraction is a change in speed of light. 
+- Two things are happening in refraction, a change in speed of light and a change in direction from the original light path of travel. These two phenomenons occur simultaneously OR intuitively I can guess that the change in light speed precedes change in direction. 
+- Light in a vacuum travels at 3 * 10 ^8 m/s but loses energy upon collision with other particles. This mechanism of energy loss is built on the particle-particle interaction concept.
+- The speed of light is dependent upon the properties of the medium referred to as the optical density (OD).
+- In terms of direction using FST (fast to solw towards N) vs SFA (slow to fast away from N).
+
+## Optical vs Physical Density
+
+- Physical density is a measure of M/V.
+- Optical density operates on a nice premise of EM hitting the atoms in a medium, the electrons in the medium becoming excited and moving up in energy level and as they drop in energy level, a new EM transmission is released. This process occurs from atom to atom along the path of travel.
+- A value almost propotional to the OD value will be the index of refraction value which is simply a ratio of the speed of light in vacuum versus the speed of light in medium.
+- Despite all this cool physics, it turns out getting to OD is significantly simplified likely because of the intricacies of light travel. A closer look at light travel along the path of atoms could lead to questions like what is the difference in the behavior (speed and direction) of light when hitting atoms in a straight pattern vs a zig-zag pattern?
+- Anyway, OD is derived in two steps:
+        
+        1. Absorbance A = -log(Intensity in medium/Intensity in vacuum) 
+        2. OD = A/sample thickness (width from side and height from top)
+        3. The OD value is equal the absorbance when L == 1
+        
+- When making an instrument for OD measurements, the setup will be:
+    
+        1. Light source
+        2. Collimator lens
+        3. Monochromatic prism or grating
+        4. Wavelength selector or slit (with a control mechanism in commercial products)
+        5. Sample at the end for testing
+        
+- OD Applications:
+
+        1. bacterial growth measurement for obtaining optimal count of bacteria.
+        
+## Keywords
+
+- Primary or capture Ab: The antibody used to coat the plate in sandwich ELISA.
+
+- Secondary or detection Ab: The second antibody involved in ELISA that is not DIRECT ELISA.
+
+- Conjugate Enzyme: An enzyme conjugated to an analyte for use in Competitive ELISA.
+
+- Substrate: The substrate for the ELISA enzyme.
+
+
+## Noise (lambda correction)
+
+- In-device correction of the signal produced by the binding reaction. 
+- I am guessing the main idea here is dirt or background absorbance at the correct vs wrong wavelength. A difference in those values spells a problem but I am unsure what the problem will be. 
+- After looking at a YouTube video i was able to see how background noise can emerge. For example a light source that pumps an IR beam will lead to a spike in the IR portion of the spectrum and this is unsure how this affects absorbance at the target lambda. Based on the video I watched this was common in the green wavelength region. The blue region could suffer from such effects as well. A correction factor can then be applied to this BUT i have no idea how that will be done.
+- OK maybe i have an idea on correction since it is data once the hardware has captured the information. Given that the color is determined by the peak wavelength of the spectrum (range of values captured by the sensor or LDR), picking a correction factor and applying it to this spectrum or data set can shift the peak value yielding a different color conclusion.  This is useful when the experimenter is comparing two samples or analytes that should yield different colors; this helps know which sample is more abundant vs the other.
+
+
+## Negative Controls
+
+- As always the fight of noise vs signal.
+
+- characterized by the absence of components required for successful detection of the analyte or antigen.
+
+- The goal is to determine non-specific binding and its source:
+
+        1. Assume Abs are mixed with a non-analyte sample or no sample at all. Any bindings observed here are nsbs.
+        2. Assume wrong Abs are mixed with an analyte sample. This scenario a little less intuitive but observed bindings are nsb.
+        3. The points above provide a big picture of nsbs.
+        
+        BLANKS:
+        1. A completely empty well that has never seen liquid.
+        2. Another approach will be using the ELISA buffer. This is no different from my use of the RNA buffer in blanking for RNA spectrophotometry. I am just now getting a better handle of the physics concept behind colourless samples like RNA vs Elisa samples. In colorless samples I am now realizing that a light source like UV will be most appropriate and I can guess that physicist arrived at knowing the peak wavelength of UV absorbance for RNA or DNA by intensive testing. In contrast to Elisa type experiments, visible is an appropriate source to detect color intensity and by so doing knowing what samples contain more of less of an analyte. More specific binding in Elisa should yield higher intensity and now I see why some substance that produces color post-binding is often used. I can say now that I get ELISA, RNA spectrophotometry and more of the other concepts. I am even curious if IR can be used for RNA or DNA samples.
+        3. Another blank is adding sample and stop solution (chromogen blank). Here the contribution of the substrate to absorbance is quantified. I was curious what a stop solution was? it inhibits enzymatic activity of the enzyme and stabilizes the oxidized products of the fluorophore.
+        4. Blanks exists to know the contribution of the elisa buffer or the plastic to absorbance. Any absorbance contributed by the blanks can be subtracted from sample absorbance. Just an idea but likely NOT needed.
+        5. Blanks give the minimum background because it is often clear plastic or clear buffer solution.
+        
+      __SANDWICH__
+        
+      S0(zero standard or sample/analyte):
+      1. Add everything needed for color production. 
+      2. Produces the max background in the absence of sample or analyte. Color obtained from anything other than the target analyte (==NOISE).
+      3. This value is good for correction of all other samples. I think this is simply to say that subtracting this value from sample measurements should yield more precise readings for samples.
+      4. This control is specific to the sandwich ELISAs if i can remember the visual but the data is pretty clear to me.
+      5. For clarity of my notes, I am assuming that sandwich protocols are more complex and so controls here can be used in DIRECT ELISA.
+      
+      Secondary/detection antibody control:
+      1. Test nsb of the detection Ab.
+      2. Does not really fulfill much of a purpose as it simply seems to convert a sandwich assay into a direct assay. If the capture Ab is needed to achieve color production then it can help understand any background that occurs from detection Ab nsb.
+      
+      Negative Matrix Control:
+      1. Specific to blood samples. A matrix refers to the all components of a sample. 
+      2. Utilize a matrix that contains no analyte. I am a little unsure here but the thought is obtaining a blood sample that is guaranteed to contain no analyte (Fe, Zn etc).
+      3. nsb to non-targeted analytes can lead to false positive signals. I am just now realizing that negative controls aim to SQUASH false positive signals.
+      4. For the exception that these negative matrix controls arent guaranteed to produce color, this is very similar to the S0 control.
+      
+      __COMPETITIVE__
+      
+      Non-specific binding (NSB):
+      0. The conjugated enzyme binds or is specific to conjugated Abs.
+      1. Detects unspecific binding of the conjugated enzyme. The conjugated enzyme is the source of color after a substrate is introduced so nsb from the conjugated enzyme can lead to false positive reads.
+      2. Performed by removing the capture Ab and sample or analyte. Guage the conjugated enzyme behavior in the absence of a capture Ab and sample.
+      3. it can also be used to detect issues with the capture Ab. Achieved by sequential incubation (with capture Ab) of high conc standard or analyte then conjugate vs silmautaneous incubation of standard or analyte and conjugate.
+      4. It is also smart to perform this control with the sample or standard because actual experimental conditions will have the sample or standard.
+      5. Noise in this control is denoted by high OD values. 
+        
+## Positive Control
+
+      __COMPETITIVE__
+      
+      B0:
+      1. Quantifies noise in the absence of a sample (matrix) or target analyte.
+      2. Algorithmic thinking is built here:
+        a. Conjugating the enzyme to the target analyte reverses the read on the results. high OD becomes signal.
+        b. The normal scenario is a competitive conjugate enzyme and this means high OD is noise.
+        c. conjugating sample and competitor yields double signal or noise.
+        
+      TA (Total Activity or Affinity):
+      1. Ensure enzymatic activity of the enzyme conjugated Ab.
+      2. Incubate the enzyme conjugate and substrate only. 
+      3. The time frame of this incubation is the key part of this control. A stop buffer added to halt the enzymatic reaction. This is a qualitative control as time should be recorded to aid in knowing optimal incubation time for the reactions.
+      4. I am guessing values greater than B0 are not good but no reason why. The time frame it takes to get to the B0 value will be my best guess for the optimal incubation time for results to be considered valid.
+      
+      
+      Endogenous Protein Controls
+      1. deploy endogenous proteins as the positive controls when recombinant proteins are being used as the standard. Ensures Ab-protein dynamics are similar for both protein types.
+      
+      Positive Matrix Controls
+      1. In a negative matrix control the target analyte is excluded from the matrix to find noise from other matrix components.
+      2. The positive matrix is performed by using a matrix or matrix components with known quantities of the analyte. Hence we can correlate expected vs measured values of the analyte to determine matrices (samples) with upregulated vs downregulated matrix interference. 
+      3. Good in the detection of false+ve and false-ve.
+      
+      Spiked matrix controls
+      1. matrix components with little amounts of the target analyte are spiked with known quantities of the analyte. 
+      2. Measure correlation between measured values and expected values.
+      3. Especially useful in situations where the target analyte is extracted from a matrix. Since known quantities of the analyte is known before extraction, it is a good tool to assess the efficiency of extraction. 
+      
+      Serial Matrix Sample Dilutions
+      1. determine the dilution factor with minimal or negligible matrix interference.
+      2. Serially dilute a matrix type sample and measure using elisa. Obtained values are correlated to dilutiton factors to find the sweet spot of negligible matrix interference.
+      
+## Standards
+
+Not a control but important in calibration of the experiment and used for further data analysis.
+    
+      1. An accurate standard curve is important in precisely determining the quantities (conc) of samples used in the assay.
+      2. A poor standard curve could lead to poor precision in obtaining sample quantities.
+      
+## Read Elisa Data
+
+```{r}
+library(readr)
+library(tibble)
+elisa_data <- read_csv("elisa.csv")
+fit_data = head(elisa_data, 7)
+fit_data = as_tibble(fit_data)
+fit_data
+```
+
+
+## Standard Curve Data
+
+- just performing standard plots here, now doing it as a semi-pro R Dev. Two packages will likely call me that even though there is still much work to be done.
+
+```{r}
+#plot(fit_data$conc, fit_data$od)
+plot(fit_data$conc, fit_data$od, pch = 21, bg = 'black', ylab = 'od', xlab = 'concentration')
+```
+
+      
+        
+
+
+
+
+
+## Intros to Algorithms

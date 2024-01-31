@@ -1,0 +1,76 @@
+---
+title: "ELISA Summary"
+output: html_notebook
+---
+
+## Read Elisa Data
+
+```{r}
+library(readr)
+library(tibble)
+elisa_data <- read_csv("elisa.csv")
+fit_data = head(elisa_data, 7)
+fit_data = as_tibble(fit_data)
+fit_data
+```
+
+
+## Standard Curve Data
+
+- just performing standard plots here, now doing it as a semi-pro R Dev. Two packages will likely call me that even though there is still much work to be done.
+
+```{r}
+#plot(fit_data$conc, fit_data$od)
+plot(fit_data$conc, fit_data$od, pch = 21, bg = 'black', ylab = 'od', xlab = 'concentration')
+```
+
+## Negative Controls
+        
+        BLANKS:
+        0. Normal vs Chromogen blank.
+        1. A completely empty well that has never seen liquid OR a well filled with the ELISA buffer.
+        2. Measure minimum background or noise with the normal blank (OD > 0.25 == high noise). Noise from the well or elisa buffer.
+        3. Chromogen blank measures noise originating from the substrate or well. How does the original substrate behavior or color contribute to noise? chromogen noise level > normal blank level. 
+        
+      __SANDWICH__
+        
+      S0(zero standard or sample/analyte):
+      1. Add everything needed for color production except the target analyte or sample (matrix).
+      2. Maximum background or noise. S0 noise level > Blank noise level.
+      3. Utilized to obtain the null or zero concentration OD value of the std curve.
+      
+      Negative Matrix Control:
+      1. Quantify noise from non-analyte components of the matrix. 
+      2. Different from S0 because a matrix (essentially a sample) is added to the mixture.
+      
+      __COMPETITIVE__
+      
+      Non-specific binding (NSB):
+      1. Quantifies noise from the conjugated enzyme or competitor. 
+      2. Maximum noise derived by sample absence vs minimum noise derived by sample presence.
+      3. A key point here is NSB is not the expected phenomenom so noise here should not be high (<0.25). This reading should be close to the blank reading OR S0 for sandwich ELISA.
+        
+        
+## Positive Control
+      
+      B0:
+      1. Quantify noise in the absence of a sample. 
+      2. Maximum OD obtained relative to standards because of competition absence.
+      3. The value is used for adjustments of other values by doing a B/B0 percentage.
+      
+      
+# Quality Control (Incubation Time)
+
+      __COMPETITIVE__
+      
+      TA (Total activity):
+      1. Incubate substrate and conjugated enzyme only followed by a stop solution.
+      2. I purport optimal incubation time should be the time it takes to reach the B0 OD value.
+      3. 
+      
+
+
+
+
+
+## Intros to Algorithms
